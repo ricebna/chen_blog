@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="posts">
+        {% for post in post_list %}
+            <a href="{% url 'detail' id=post.id %}">
+                <section class="post">
+                    <header class="post-header">
+                        {% comment %}<img width="48" height="48" alt="Tilo Mitra's avatar" class="post-avatar"
+                             src='{% static "image/avatar.png" %}'>{% endcomment %}
+                        <h2 class="post-title">{{ post.title }}</h2>
+                        {% comment %}<p class="post-meta">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;{{ post.pub_time |date:'Y-m-d' }}&nbsp;&nbsp;
+                            <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;{{ post.views }}次浏览&nbsp;&nbsp;
+                            <i class="fa fa-book"></i>&nbsp;{{ post.category }}&nbsp;&nbsp;
+                        </p>{% endcomment %}
+                    </header>
+
+                    {% comment %}<div class="post-description">
+                        <p>
+                            {#striptags用于过滤正文中所有的HTML标签#}
+                            {#truncatechars用于截取正文前300个字符#}
+                            {{ post.content|striptags|truncatechars:300 }}
+                        </p>
+                    </div>
+                    <div>
+
+                        <a class="button" href="{% url 'detail' id=post.id %}"
+                           style="text-decoration: none">阅读全文</a>
+                    </div>{% endcomment %}
+
+                </section>
+            </a>
+        {% endfor %}
+    </div><!-- /.blog-post -->
+    {% if post_list.object_list and post_list.paginator.num_pages > 1 %}
+    <div class="page">
+        {% if post_list.has_previous %}
+            <a href="?page={{ post_list.previous_page_number }}" style="float: left"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;上一页</a>
+        {% endif %}
+        {% if post_list.has_next %}
+            <a href="?page={{ post_list.next_page_number }}" style="float: right">下一页&nbsp;&nbsp;<i class="fa fa-angle-right"></i></a>
+        {% endif %}
+    </div>
+    {% endif %}
+{% endblock %}   

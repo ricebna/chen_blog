@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+    <section class="post">
+        <header class="post-header">
+            <h2 class="post-title">{{ post.title }}</h2>
+            {% comment %}<p class="post-meta">
+                <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp; {{ post.pub_time|date:'Y-m-d H:i' }}&nbsp;&nbsp;
+                <i class="fa fa-book"></i>&nbsp;
+                <a href="{% url 'category_menu' id=post.category_id %}"
+                   style="text-decoration: none">{{ post.category }}</a>&nbsp;&nbsp;
+                <i class="fa fa-tags" aria-hidden="true"></i>
+                {% for tag in tags %}
+                    <a href="{% url 'search_tag' tag=tag %}"
+                       style="text-decoration: none">{{ tag }}</a>
+                {% endfor %}&nbsp;&nbsp;
+                <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;{{ post.views }}次浏览
+            </p>{% endcomment %}
+        </header>
+
+        <div class="post-description">
+            <p>
+                {{ post.content |safe }}
+            </p>
+        </div>
+    </section>
+    <div class="post-others">
+    <!-- 上下篇文章切换 -->
+    {% if next_post %}
+        <div class="post-next">
+        <a href="{% url 'detail' id=next_post.id %}">下一篇：{{ next_post.title }}</a>
+        </div>
+    {% endif %}
+    {% if prev_post %}
+        <div class="post-prev">
+        <a href="{% url 'detail' id=prev_post.id %}">上一篇：{{ prev_post.title }}</a>
+        </div>
+    {% endif %}
+    </div>
+
+{% endblock %}
