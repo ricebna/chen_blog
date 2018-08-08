@@ -25,7 +25,7 @@ SECRET_KEY = '*1%hfl_we7%me#&+=!q6t*f+22$ce(a@d&$yoj)kner1=y24uu'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['blog.zhihumm.com']
+ALLOWED_HOSTS = ['blog.zhihumm.com', '127.0.0.1']
 
 
 # Application definition
