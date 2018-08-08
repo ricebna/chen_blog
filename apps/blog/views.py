@@ -113,5 +113,5 @@ def test(request):
         ip = request.META['HTTP_X_FORWARDED_FOR']
     else:
         ip = request.META['REMOTE_ADDR']
-    return HttpResponse(ip)
+    return HttpResponse(request.META['REMOTE_ADDR'])
 
